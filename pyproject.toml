@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "final-project"
+version = "0.1.0"
+description = "recsys12_final_project"
+authors = ["Wonsubsub <tjqtjq1995@gmail.com>"]
+readme = "README.md"
+packages = [{include = "final_project"}]
+
+[tool.poetry.dependencies]
+python = ">=3.7"
+fastapi = "^0.100.0"
+pytest = "^7.4.0"
+uvicorn = "^0.22.0"
+black = "^23.3.0"
+mysql = "^0.0.3"
+SQLAlchemy = "^2.0.18"
+pydantic = "^2.0.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
