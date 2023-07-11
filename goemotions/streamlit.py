@@ -16,7 +16,7 @@ if st.button('분석'):
 
     if analysis_result:
         name, artist = cosine_sim_output(analysis_result)
-        st.success(f'{art}의{name}을 추천합니다!')
+        st.success(f'{artist}의{name}을 추천합니다!')
       
     else:
         st.warning('분석 결과를 찾을 수 없습니다.')
