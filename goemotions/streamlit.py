@@ -1,10 +1,9 @@
 import streamlit as st
 import pandas as pd
+import numpy as np 
 import os
 from test_pipeline import load_model, predict
-
-data_path = '../../data/'
-music_data = pd.read_csv(os.path.join(data_path, 'last_data.csv'))
+from model import cosine_sim_output
 
 tokenizer, model = load_model()
 
@@ -14,12 +13,10 @@ user_input = st.text_area('사용자의 글을 입력하세요.')
 
 if st.button('분석'):
     analysis_result = predict(user_input, tokenizer, model)
-    
+
     if analysis_result:
-        st.success('분석 결과: {}'.format(analysis_result))
-        
-        st.subheader('추천 음악')
-        recommended_music = music_data[music_data['감정'] == analysis_result]
-        st.dataframe(recommended_music)
+        name, artist = cosine_sim_output(analysis_result)
+        st.success(f'{art}의{name}을 추천합니다!')
+      
     else:
         st.warning('분석 결과를 찾을 수 없습니다.')

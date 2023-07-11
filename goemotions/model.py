@@ -1,6 +1,36 @@
 import torch.nn as nn
 from torch.nn import BCEWithLogitsLoss
 from transformers import ElectraModel, ElectraPreTrainedModel
+from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
+import os
+
+def cosine_sim_output(analysis_result):
+    data_path = '../../data/'
+    music_data = pd.read_csv(os.path.join(data_path, 'last_data.csv'), encoding="utf-8")
+
+    labels = ['admiration', 'anger', 'approval', 'caring', 'confusion',
+          'curiosity', 'desire', 'disappointment', 'disapproval', 'embarrassment',
+          'excitement', 'fear', 'gratitude', 'joy', 'love', 'optimism',
+          'pride', 'realization', 'relief', 'sadness', 'neutral']
+    
+    result = music_data.groupby(['title', 'artist'], as_index=False)[labels].agg('sum')
+    
+    temp = result.iloc[:,[i for i in range(2,23)]]
+
+    cosine_sim = cosine_similarity(analysis_result, temp[:1])
+        
+    x = 0
+    t = 0 # index
+    for i, j in enumerate(cosine_sim):
+        if j >= x:
+            t = i
+            x = j
+
+    name = result.iloc[t+1]['title']
+    artist = result.iloc[t+1]['artist']
+    
+    return name, artist
 
 
 class ElectraForMultiLabelClassification(ElectraPreTrainedModel):
