@@ -16,20 +16,35 @@ def cosine_sim_output(analysis_result):
     
     result = music_data.groupby(['title', 'artist'], as_index=False)[labels].agg('sum')
     
+    for i in analysis_result:
+        a_list = i["scores"]
+        b_list = i["labels"]
+    new = pd.DataFrame([a_list], columns=b_list)
+
+    new['anger'] = new['anger']+new['annoyance']+new['disgust']
+    new['sadness'] = new['sadness']+new['grief']
+    new['joy'] = new['joy']+new['amusement']
+    new['confusion'] = new['confusion']+new['nervousness']
+    new['disappointment'] = new['disappointment']+new['remorse']
+    new['admiration'] = new['admiration']+new['surprise']
+
+    new = new.drop(['annoyance','disgust','grief','amusement','nervousness','remorse','surprise'], axis=1)
+
     temp = result.iloc[:,[i for i in range(2,23)]]
 
-    cosine_sim = cosine_similarity(analysis_result, temp[:1])
-        
+    cosine_sim = cosine_similarity(temp[::1],[new.iloc[0]])
+
     x = 0
     t = 0 # index
     for i, j in enumerate(cosine_sim):
         if j >= x:
             t = i
             x = j
-
+    
+    print(x)
     name = result.iloc[t+1]['title']
     artist = result.iloc[t+1]['artist']
-    
+
     return name, artist
 
 

@@ -24,7 +24,9 @@ def predict(text, tokenizer, model):
         for idx, s in enumerate(item):
             if s > threshold:
                 labels.append(model.config.id2label[idx])
-                scores.append(s)
+                scores.append(s.item())
         result.append({"labels": labels, "scores": scores})
     
+
+
     return result
