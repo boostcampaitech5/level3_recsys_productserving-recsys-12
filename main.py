@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from mysql_config import USER, PASSWORD, HOST, PORT, DB
 from pydantic import BaseModel
 from sqlalchemy.ext.declarative import declarative_base
-from user import User
-from like import Like
-import MySQLdb
+# from user import User
+# from like import Like
+from base import Base
+import user, like
+import uvicorn
 
 app = FastAPI()
 Base = declarative_base()
@@ -16,38 +18,30 @@ engine = create_engine(
     echo=True
 )
 
+# SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-class UserCreate(BaseModel):
-    id : str
-    name: str
-    password : str
-
-class LikeCreate(BaseModel):
-    status: bool
-    user_id: str
-
 @app.post("/users/")
-def create_user(user : UserCreate):
+def post_new_user(new_user : user.CreateRequest):
     db = SessionLocal()
-    new_user = User(id=user.id, password=user.password ,name=user.name)
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-    return new_user
+    return user.create_user(new_user, db)
+
+@app.get("/get_id/{user_name}")
+def get_id(user_name):
+    db = SessionLocal()
+    return user.get_user_id(user_name, db)
 
 @app.post("/likes/")
-def create_post(like):
+def post_new_like(new_like : like.CreateRequest):
     db = SessionLocal()
-    user = db.query(User).filter(User.id == like.user_id).first()
-    if not user:
-        return {"error": "User not found"}
-    new_like = Like(status=like.status, user_id=like.user_id)
-    db.add(new_like)
-    db.commit()
-    db.refresh(new_like)
-    return new_like
+    return like.create_like(new_like, db)
 
 @app.get("/")
 async def root():
     return {"message": "Hello, World!"}
+
+if __name__ == "__main__":
+    # SessionLocal.configure(bind=engine)
+    # Base.metadata.bind = engine
+    Base.metadata.create_all(bind=engine)
+    uvicorn.run(app)

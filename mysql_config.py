@@ -1,5 +1,0 @@
-USER = 'root'
-PASSWORD = 'recsys12one!'
-HOST = 'localhost'
-PORT = '3306'
-DB = 'musicrec'
