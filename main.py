@@ -4,13 +4,11 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from mysql_config import USER, PASSWORD, HOST, PORT, DB
 from pydantic import BaseModel
 from sqlalchemy.ext.declarative import declarative_base
-# from user import User
-# from like import Like
 from base import Base
-import user, like
+import user, music, like
 import uvicorn
 
-app = FastAPI()
+app = FastAPI() 
 Base = declarative_base()
 
 engine = create_engine(
@@ -18,7 +16,6 @@ engine = create_engine(
     echo=True
 )
 
-# SessionLocal = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 @app.post("/users/")
@@ -31,17 +28,24 @@ def get_id(user_name):
     db = SessionLocal()
     return user.get_user_id(user_name, db)
 
-@app.post("/likes/")
-def post_new_like(new_like : like.CreateRequest):
+@app.get("/get_likes/{user_name}")
+def get_id(user_name):
     db = SessionLocal()
-    return like.create_like(new_like, db)
+    return user.get_user_likes(user_name, db)
+
+@app.post("/click_like/")
+def post_new_like(new_like : like.LikeRequest):
+    db = SessionLocal()
+    exists, user_name, music_name = like.check_like(new_like, db)
+    if exists:
+        return like.change_like(user_name, music_name, db)
+    else:
+        return like.create_like(user_name, music_name, db)
 
 @app.get("/")
 async def root():
     return {"message": "Hello, World!"}
 
 if __name__ == "__main__":
-    # SessionLocal.configure(bind=engine)
-    # Base.metadata.bind = engine
     Base.metadata.create_all(bind=engine)
     uvicorn.run(app)
