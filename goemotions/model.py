@@ -2,6 +2,7 @@ import torch.nn as nn
 from torch.nn import BCEWithLogitsLoss
 from transformers import ElectraModel, ElectraPreTrainedModel
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import manhattan_distances
 import pandas as pd
 import os
 
@@ -40,10 +41,57 @@ def cosine_sim_output(analysis_result):
         if j >= x:
             t = i
             x = j
+    emo = []
+    for i, j in enumerate(result.iloc[t][2::]):
+        if j > 0.5:
+            x = result.columns[i]
+            emo.append(x)
+    
+    name = result.iloc[t]['title']
+    artist = result.iloc[t]['artist']
+
+    return name, artist, emo
+
+def manhattan_dis_output(analysis_result):
+    
+    data_path = '../../data/'
+    music_data = pd.read_csv(os.path.join(data_path, 'last_data.csv'), encoding="utf-8")
+
+    labels = ['admiration', 'anger', 'approval', 'caring', 'confusion',
+          'curiosity', 'desire', 'disappointment', 'disapproval', 'embarrassment',
+          'excitement', 'fear', 'gratitude', 'joy', 'love', 'optimism',
+          'pride', 'realization', 'relief', 'sadness', 'neutral']
+    
+    result = music_data.groupby(['title', 'artist'], as_index=False)[labels].agg('sum')
+    
+    for i in analysis_result:
+        a_list = i["scores"]
+        b_list = i["labels"]
+    new = pd.DataFrame([a_list], columns=b_list)
+
+    new['anger'] = new['anger']+new['annoyance']+new['disgust']
+    new['sadness'] = new['sadness']+new['grief']
+    new['joy'] = new['joy']+new['amusement']
+    new['confusion'] = new['confusion']+new['nervousness']
+    new['disappointment'] = new['disappointment']+new['remorse']
+    new['admiration'] = new['admiration']+new['surprise']
+
+    new = new.drop(['annoyance','disgust','grief','amusement','nervousness','remorse','surprise'], axis=1)
+
+    temp = result.iloc[:,[i for i in range(2,23)]]
+
+    manhattan_dis = manhattan_distances(temp[::1],[new.iloc[0]])
+
+    x = 360
+    t = 0 # index
+    for i, j in enumerate(manhattan_dis):
+        if j <= x:
+            t = i
+            x = j
     
     print(x)
-    name = result.iloc[t+1]['title']
-    artist = result.iloc[t+1]['artist']
+    name = result.iloc[t]['title']
+    artist = result.iloc[t]['artist']
 
     return name, artist
 
