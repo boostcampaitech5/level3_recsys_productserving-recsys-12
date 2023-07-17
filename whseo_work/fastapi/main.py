@@ -22,6 +22,10 @@ app.add_middleware(
 def root():
     return {"fastapi-react link success"}#{"message" : "root"}
 
+class Config(BaseModel):
+    text : str
+
 @app.post(path = "/input")
-def test_input(text):
-    return text
+def test_input(data : Config):
+    print(data.dict())
+    return {"data" : data.text}

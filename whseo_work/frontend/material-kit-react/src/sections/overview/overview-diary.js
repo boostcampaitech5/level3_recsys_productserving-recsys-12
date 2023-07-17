@@ -30,56 +30,15 @@ export const OverviewDiary = (props) => {
 
   };
 
-  const url = "http://localhost:8001/input";
-  const bodyData = {
-    "text" : "test"
-  };
-  const config = {"Content-Type": 'application/json'};
-
-  
   async function postText(){
-    
-    axios.post(url, bodyData)
-        .then(res => {
-            localStorage.setItem("text", JSON.stringify(res.data.data.text))
-           // navigate(`/`);
-        })
-        .catch(err => {
-            alert("error!!!");
-            console.log(err.response);
-        })
-      /*
     try{
-        axios.post(
-            url, {text : "test"}, config
-        ).then(function(response){
-            alert("success");
-            console.log("");
-            console.log("RESPONSE : " + JSON.stringify(response.data));
-            console.log("");
-        }).catch(
-            error=>{
-                console.log("ERROR : " + JSON.stringify(error));
-                alert(error);
-            }
-        );
-        
-        const res = await axios.post('http://localhost:8001/input', {text : "test"}
-        ).then(function(response){
-            alert("success!");
-        }).catch(
-            error=> {
-                alert(error);
-            }
-        );
-        
+          
         const res = await axios.post('http://localhost:8001/input',{
-            text : "react push to fastapi"
+            text : text
         });
     }catch(e){
         alert("error!");
     }
-    */
   }
 
     
