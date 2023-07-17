@@ -1,0 +1,75 @@
+#app {
+  height: 100%;
+}
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.swiper {
+  width: 70%;
+  height: 70%;
+}
+
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  width: 300px;
+  height: 300px ;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color1 {
+  background-color: rgb(204, 74, 120);
+}
+.color2 {
+  background-color: #cc9a58;
+}
+.color3 {
+  background-color:darkgreen;
+}
+.color4 {
+  background-color: rgb(22, 137, 132);
+}
+.color5 {
+  background-color: rgb(62, 106, 141);
+}
+.color6 {
+  background-color: rgb(125, 57, 134);
+}
+.color7 {
+  background-color: rgb(49, 105, 26);
+}
+.color8 {
+  background-color: rgb(189, 135, 65);
+}
+.color9 {
+  background-color: rgb(106, 140, 184);
+}
+
+.swiper-slide img {
+  display: block;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+
+.line_change {
+  white-space: pre-line;
+}
