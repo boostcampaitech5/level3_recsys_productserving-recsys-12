@@ -44,9 +44,9 @@ def cosine_sim_output(analysis_result):
     emo = []
     for i, j in enumerate(result.iloc[t][2::]):
         if j > 0.5:
-            x = result.columns[i]
+            x = result.columns[i+2]
             emo.append(x)
-    
+        
     name = result.iloc[t]['title']
     artist = result.iloc[t]['artist']
 
@@ -88,12 +88,17 @@ def manhattan_dis_output(analysis_result):
         if j <= x:
             t = i
             x = j
-    
-    print(x)
+
+    emo = []
+    for i, j in enumerate(result.iloc[t][2::]):
+        if j > 0.5:
+            x = result.columns[i+2]
+            emo.append(x)
+
     name = result.iloc[t]['title']
     artist = result.iloc[t]['artist']
-
-    return name, artist
+    
+    return name, artist, emo
 
 
 class ElectraForMultiLabelClassification(ElectraPreTrainedModel):
