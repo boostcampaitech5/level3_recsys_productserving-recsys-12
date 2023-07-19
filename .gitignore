@@ -5,3 +5,5 @@ filepath.py
 dataset
 monologg
 goemotion_model
+mysql_config.py
+postgresql_config.py
