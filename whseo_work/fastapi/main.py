@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel, Field
 
+from goemotions.service import emotion_cos_recommendation
+
 app = FastAPI()
 
 origins = [
@@ -25,7 +27,15 @@ def root():
 class Config(BaseModel):
     text : str
 
-@app.post(path = "/input")
+@app.post(path = "/recomm_music")
 def test_input(data : Config):
     print(data.dict())
-    return {"data" : data.text}
+    artist, title = emotion_cos_recommendation(data.text)
+    print(artist, title)
+    return {
+        "status" : "SUCCESS",
+        "artist" : artist,
+        "title" : title,
+    }
+    #return {"artist" : artist, "title" : title}
+

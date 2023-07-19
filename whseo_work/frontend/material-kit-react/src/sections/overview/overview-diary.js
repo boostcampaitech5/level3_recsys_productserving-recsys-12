@@ -12,14 +12,15 @@ export const OverviewDiary = (props) => {
     const diary = useDiary();
     const { sx } = props;
     const [text, setText] = useState('');
-    
+    const [artist, setArtist] = useState('');
+    const [title, setTitle] = useState('');
     
   const onChange = (e) => {
     setText(e.target.value);
   };
 
   const onClick = () => {
-    alert(text);
+    //alert(text);
     try{
         //diary.recomm(text);
         postText();
@@ -31,13 +32,17 @@ export const OverviewDiary = (props) => {
   };
 
   async function postText(){
-    try{
-          
-        const res = await axios.post('http://localhost:8001/input',{
+    try{      
+        const res = await axios.post('http://localhost:8001/recomm_music',{
             text : text
         });
+        setArtist(res.data.artist)
+        setTitle(res.data.title)
+        setText('')
+
     }catch(e){
-        alert("error!");
+        //alert(e);
+        console.log(e);
     }
   }
 
@@ -76,6 +81,9 @@ export const OverviewDiary = (props) => {
                <h2>
                 Update : {text}
                </h2>
+               <h3>
+                Response : {artist} {title}
+               </h3>
             </Stack>
         </CardContent>
     </Card>
