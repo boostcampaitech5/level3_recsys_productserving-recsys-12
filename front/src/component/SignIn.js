@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState, useEffect } from 'react';
 
 import SignUp from './SignUp.js';
 import axios from 'axios';
@@ -33,28 +34,50 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-  	// login 버튼 클릭 이벤트
-    const onClickLogin = () => {
-      console.log('click login')
-  }
+export default function SignIn(props) {
 
-// 페이지 렌더링 후 가장 처음 호출되는 함수
-    /*const useEffect(() => {
-      axios.get('/user_inform/login')
-      .then(res => console.log(res))
-      .catch()
-    },
-  // 페이지 호출 후 처음 한번만 호출될 수 있도록 [] 추가
-  [])*/
+  
+
+  const [inputId, setInputId] = useState('')
+    const [inputPw, setInputPw] = useState('')
+ 
+    const handleInputId = (e) => {
+        setInputId(e.target.value)
+    }
+ 
+    const handleInputPw = (e) => {
+        setInputPw(e.target.value)
+    }
+
+    //여기 로그인 통신 해 보려다가 못 함.. 수정 수정 
+ /*
+    const onClickLogin = () => {
+        console.log('click login')
+        console.log('ID : ', inputId)
+        console.log('PW : ', inputPw)
+        postText()
+        .then(res => {
+          console.log(res)
+
+      })
+
+    }
+    async function postText(){
+      try{
+            
+          const res = await axios.post('http://localhost:8001/input',{
+            params: {
+              'user_id': inputId,
+              'user_pw': inputPw
+              }
+          });
+          
+      }catch(e){
+          alert("error!");
+      }
+    }
+ 
+*/
 
 
   return (
@@ -75,30 +98,28 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
+              onChange={handleInputId}
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="inputId"
               label="Email Address"
-              name="email"
+              name="inputId"
               autoComplete="email"
               autoFocus
             />
             <TextField
+              onChange={handleInputPw}
               margin="normal"
               required
               fullWidth
-              name="password"
+              name="inputPw"
               label="Password"
               type="password"
-              id="password"
+              id="inputPw"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               onClick={onClickLogin}
@@ -111,9 +132,7 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+
               </Grid>
               <Grid item>
                 <Link href="/SignUp" variant="body2">

@@ -64,7 +64,7 @@ export default function Blog() {
         p: { md: 3 },
         pl: { md: 30 },
       }}
-      variant="h4" color="inherit" gutterBottom>
+      variant="h4" color="inherit" >
         이런 노래는 어떠세요?
       </Typography>
       

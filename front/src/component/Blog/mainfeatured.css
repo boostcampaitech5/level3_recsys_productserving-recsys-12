@@ -1,8 +1,8 @@
 .main_button {
-    left: 900px;
+    left: 1000px;
     width: 100px;
     height: 35px;
-    bottom: 10px;
+    bottom: 30px;
     background-color: #4b4b4b;
   }
 
@@ -10,7 +10,9 @@
     background-color: darkgray;
     /* transparent;*/
     height: 1;
-    width: 1;
+    width: 10;
     border: 2px solid rgba(0, 0, 0, 0.23);
     border-radius: 7px;
+    font-size: 1.7em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }

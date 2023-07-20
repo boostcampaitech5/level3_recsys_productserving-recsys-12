@@ -5,16 +5,22 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import {useState} from "react";
 import './mainfeatured.css';
+
 
 function MainFeaturedPost(props) {
   const { post } = props;
   const [text, setText] = useState("")
+  let [inputCount, setInputCount] =useState(0);
   const onChange = (e) => {
       setText(e.target.value);
+      setInputCount(e.target.value.length);
   }
+
+
+
+
 
   return (
     <Paper
@@ -46,7 +52,7 @@ function MainFeaturedPost(props) {
           <Box
             sx={{
               position: 'relative',
-              p: { xs: 3, md: 5 },
+              p: { xs: 3, md: 8 },
               pr: { md: 0 },
               bottom: 20,
             }}
@@ -54,8 +60,13 @@ function MainFeaturedPost(props) {
             <Typography component="h1" variant="h3" color="inherit" gutterBottom>
               {post.title}
             </Typography>
-            <input className = 'input_box' onChange={onChange} value={text} />
-            {text}
+            <textarea 
+            className = 'input_box' 
+            onChange={onChange} 
+            value={text} 
+            maxLength={250}
+            size/>
+            <p><span>{inputCount}</span><span>/250자</span></p>
             
           </Box>
           <Button className = 'main_button'variant="outlined" href="#outlined-buttons">

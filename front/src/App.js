@@ -5,7 +5,9 @@ import './App.css';
 import SignIn from './component/SignIn';
 import SignUp from "./component/SignUp";
 import Blog from './component/Blog/Blog';
+import Login from './component/Login';
 import RecPage from './component/RecPage';
+// import RecPage from './component/RecPage';
 import { Routes, Route, BrowserRouter,Navigate} from "react-router-dom";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         />
         <Route path="/SignIn" element={<SignIn />} />
         {/* <SignUp /> */}
+        <Route path="/Login" element={<Login />} />
+        {/* <Login /> */}
         <Route path="/SignUp" element={<SignUp/>} />
         {/* <SignIn /> */}
         <Route path="/SignIn" element={<SignIn/>} />
@@ -29,6 +33,7 @@ function App() {
         <Route path="/MainPage" element={<Blog/>} />
         {/* <RecPage /> */}
         <Route path="/RecPage" element={<RecPage/>} />
+        
         
       </Routes>
     </BrowserRouter> 
