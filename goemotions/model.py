@@ -3,19 +3,15 @@ from torch.nn import BCEWithLogitsLoss
 from transformers import ElectraModel, ElectraPreTrainedModel
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.metrics.pairwise import manhattan_distances
+import numpy as np
 import pandas as pd
 import os
 
-def cosine_sim_output(analysis_result):
-    data_path = '../../data/'
-    music_data = pd.read_csv(os.path.join(data_path, 'last_data.csv'), encoding="utf-8")
+def cosine_sim_output(x, analysis_result):
+    x -= 1
 
-    labels = ['admiration', 'anger', 'approval', 'caring', 'confusion',
-          'curiosity', 'desire', 'disappointment', 'disapproval', 'embarrassment',
-          'excitement', 'fear', 'gratitude', 'joy', 'love', 'optimism',
-          'pride', 'realization', 'relief', 'sadness', 'neutral']
-    
-    result = music_data.groupby(['title', 'artist'], as_index=False)[labels].agg('sum')
+    data_path = '../data/'
+    result = pd.read_csv(os.path.join(data_path, 'last_data.csv'), encoding="utf-8")
     
     for i in analysis_result:
         a_list = i["scores"]
@@ -31,26 +27,14 @@ def cosine_sim_output(analysis_result):
 
     new = new.drop(['annoyance','disgust','grief','amusement','nervousness','remorse','surprise'], axis=1)
 
-    temp = result.iloc[:,[i for i in range(2,23)]]
+    temp = result.iloc[:,[i for i in range(3,24)]]
 
     cosine_sim = cosine_similarity(temp[::1],[new.iloc[0]])
-
-    x = 0
-    t = 0 # index
-    for i, j in enumerate(cosine_sim):
-        if j >= x:
-            t = i
-            x = j
-    emo = []
-    for i, j in enumerate(result.iloc[t][2::]):
-        if j > 0.5:
-            x = result.columns[i+2]
-            emo.append(x)
-        
-    name = result.iloc[t]['title']
-    artist = result.iloc[t]['artist']
-
-    return name, artist, emo
+ 
+    indx = np.argsort(cosine_sim, axis=0)
+    indx = indx[-10:] # top-K 
+    
+    return result.iloc[int(indx[x])]
 
 def manhattan_dis_output(analysis_result):
     
