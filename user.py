@@ -18,6 +18,7 @@ class User(Base):
     id = Column(String(120), primary_key=True, default=lambda : str(uuid.uuid4()))
     password = Column(String(20), nullable=False)
     likes = relationship('like.Like', back_populates='user')
+    diaries = relationship('diary.Diary', back_populates='user')
     # user_weight = relationship('UserWeight', uselist=False, back_populates='users')
     name = Column(String(20), nullable=False, unique=True)
     
@@ -26,6 +27,10 @@ Base.metadata.create_all(bind=engine)
 class CreateRequest(BaseModel):
     password : str
     name : str
+
+class LogInRequest(BaseModel):
+    name : str
+    password :str
 
 def create_user(request: CreateRequest, db: Session):
     new_user = User(password=request.password, name=request.name)
@@ -41,3 +46,8 @@ def get_user_id(user_name, db: Session):
 def get_user_likes(user_name, db: Session):
     user = db.query(User).filter(User.name==user_name).first()
     return user.likes
+
+def log_in(request: LogInRequest, db: Session):
+    user = db.query(User).filter_by(name=request.name, password=request.password).first()
+    return user.name
+        

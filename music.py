@@ -3,7 +3,6 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from mysql_config import USER, PASSWORD, HOST, PORT, DB
-from sqlalchemy.ext.declarative import declarative_base
 from pydantic import BaseModel
 import uuid
 from base import Base

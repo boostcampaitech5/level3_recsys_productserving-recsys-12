@@ -2,8 +2,6 @@ from sqlalchemy import Column, String, ForeignKey, Boolean, DateTime, Integer
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
-from sqlalchemy.orm import joinedload
-from sqlalchemy.sql import exists
 from mysql_config import USER, PASSWORD, HOST, PORT, DB
 from sqlalchemy.ext.declarative import declarative_base
 from pydantic import BaseModel

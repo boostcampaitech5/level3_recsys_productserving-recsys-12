@@ -5,7 +5,7 @@ from mysql_config import USER, PASSWORD, HOST, PORT, DB
 from pydantic import BaseModel
 from sqlalchemy.ext.declarative import declarative_base
 from base import Base
-import user, music, like
+import user, music, like, diary
 import uvicorn
 
 app = FastAPI() 
@@ -41,6 +41,16 @@ def post_new_like(new_like : like.LikeRequest):
         return like.change_like(user_name, music_name, db)
     else:
         return like.create_like(user_name, music_name, db)
+
+@app.get("/login")
+def login(log_user : user.LogInRequest):
+    db = SessionLocal()
+    return user.log_in(log_user, db)
+
+@app.post("/diary")
+def post_diary(new_diary : diary.DiaryRequest):
+    db = SessionLocal()
+    return diary.create_diary(new_diary, db)
 
 @app.get("/")
 async def root():
