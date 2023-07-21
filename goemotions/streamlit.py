@@ -17,14 +17,15 @@ if st.button('분석'):
     analysis_result = predict(user_input, tokenizer, model)
 
     if analysis_result:
-        music_result = cosine_sim_output(1, analysis_result)
+        music_result = cosine_sim_output(analysis_result)
 
-        artist = music_result['artist']
-        name = music_result['title']
+        for i in range(3):
+            artist = music_result.iloc[i]['artist']
+            name = music_result.iloc[i]['title']
         
-        st.success(f'{artist}의 {name}을 추천합니다!')
-        video_sd = load_youtube(artist, name)
-        st.success(st.video(video_sd))
+            st.success(f'{artist}의 {name}을 추천합니다!')
+            video_sd = load_youtube(artist, name)
+            st.success(st.video(video_sd))
         #emotion = ','.join([e for e in emo])
         #st.success(f'{emotion}의 감정!')
       

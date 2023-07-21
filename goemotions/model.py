@@ -7,9 +7,7 @@ import numpy as np
 import pandas as pd
 import os
 
-def cosine_sim_output(x, analysis_result):
-    x -= 1
-
+def cosine_sim_output(analysis_result):
     data_path = '../data/'
     result = pd.read_csv(os.path.join(data_path, 'last_data.csv'), encoding="utf-8")
     
@@ -32,9 +30,13 @@ def cosine_sim_output(x, analysis_result):
     cosine_sim = cosine_similarity(temp[::1],[new.iloc[0]])
  
     indx = np.argsort(cosine_sim, axis=0)
-    indx = indx[-10:] # top-K 
+    indx = indx[-3:] # top-K 
+
+    topk = result.iloc[indx[0]]
+    for i in indx[1::]:
+        topk = pd.concat([topk, result.iloc[i]], axis=0)
     
-    return result.iloc[int(indx[x])]
+    return topk
 
 def manhattan_dis_output(analysis_result):
     
