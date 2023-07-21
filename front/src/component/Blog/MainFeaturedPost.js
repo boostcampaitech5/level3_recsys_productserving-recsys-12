@@ -7,16 +7,44 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import {useState} from "react";
 import './mainfeatured.css';
-
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function MainFeaturedPost(props) {
+
+
   const { post } = props;
-  const [text, setText] = useState("")
+  const [text, setText] = useState('');
+  const [artist, setArtist] = useState('');
+  const [title, setTitle] = useState('');
+  const [url, setUrl] = useState('');
+
+
   let [inputCount, setInputCount] =useState(0);
   const onChange = (e) => {
-      setText(e.target.value);
-      setInputCount(e.target.value.length);
+    setText(e.target.value);
+    setInputCount(e.target.value.length);
   }
+
+  async function postText(){
+    try{      
+        const res = await axios.post('http://localhost:8001/recomm_music',{
+            text : text
+        });
+        setArtist(res.data.artist)
+        setTitle(res.data.title)
+        setUrl(res.data.url)
+        setText('')
+
+    }catch(e){
+        console.log(e);
+    }
+  }
+
+
+
+  
+  const navigate = useNavigate();
 
 
 
@@ -69,7 +97,21 @@ function MainFeaturedPost(props) {
             <p><span>{inputCount}</span><span>/250자</span></p>
             
           </Box>
-          <Button className = 'main_button'variant="outlined" href="#outlined-buttons">
+          <Button 
+          className = 'main_button'
+          variant="outlined" 
+          onClick={() =>
+            {try{
+              //diary.recomm(text);
+              postText();
+          }
+          catch(err){
+      
+          }
+            navigate("/RecPage", {
+              state: { artist,title,url }
+            })
+          }}>
               {post.Button}
             </Button>
         </Grid>
