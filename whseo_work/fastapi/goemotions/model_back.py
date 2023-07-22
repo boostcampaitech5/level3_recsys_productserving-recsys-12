@@ -3,14 +3,20 @@ from torch.nn import BCEWithLogitsLoss
 from transformers import ElectraModel, ElectraPreTrainedModel
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.metrics.pairwise import manhattan_distances
-import numpy as np
 import pandas as pd
+import os
 
 from .filepath import LAST_DATA_PATH
 
 def cosine_sim_output(analysis_result):
+    music_data = pd.read_csv(LAST_DATA_PATH, encoding="utf-8")
+    labels = ['admiration', 'anger', 'approval', 'caring', 'confusion',
+          'curiosity', 'desire', 'disappointment', 'disapproval', 'embarrassment',
+          'excitement', 'fear', 'gratitude', 'joy', 'love', 'optimism',
+          'pride', 'realization', 'relief', 'sadness', 'neutral']
     
-    result = pd.read_csv(LAST_DATA_PATH, encoding="utf-8")
+    result = music_data.groupby(['title', 'artist'], as_index=False)[labels].agg('sum')
+    
     for i in analysis_result:
         a_list = i["scores"]
         b_list = i["labels"]
@@ -25,22 +31,31 @@ def cosine_sim_output(analysis_result):
 
     new = new.drop(['annoyance','disgust','grief','amusement','nervousness','remorse','surprise'], axis=1)
 
-    temp = result.iloc[:,[i for i in range(3,24)]]
+    temp = result.iloc[:,[i for i in range(2,23)]]
 
     cosine_sim = cosine_similarity(temp[::1],[new.iloc[0]])
- 
-    indx = np.argsort(cosine_sim, axis=0)
-    indx = indx[-3:] # top-K 
+    #cosine_sim.sort(reverse=True) #여기서 내림차순 정렬 top3
+    x = 0
+    t = 0 # index
+    for i, j in enumerate(cosine_sim):
+        if j >= x:
+            t = i
+            x = j
+    emo = []
+    for i, j in enumerate(result.iloc[t][2::]):
+        if j > 0.5:
+            x = result.columns[i+2]
+            emo.append(x)
+        
+    name = result.iloc[t]['title']
+    artist = result.iloc[t]['artist']
 
-    topk = result.iloc[indx[0]]
-    for i in indx[1::]:
-        topk = pd.concat([topk, result.iloc[i]], axis=0)
-    
-    return topk
+    return name, artist, emo
 
 def manhattan_dis_output(analysis_result):
     
-    music_data = pd.read_csv(LAST_DATA_PATH, encoding="utf-8")
+    data_path = './dataset'
+    music_data = pd.read_csv(os.path.join(data_path, 'last_data.csv'), encoding="utf-8")
 
     labels = ['admiration', 'anger', 'approval', 'caring', 'confusion',
           'curiosity', 'desire', 'disappointment', 'disapproval', 'embarrassment',

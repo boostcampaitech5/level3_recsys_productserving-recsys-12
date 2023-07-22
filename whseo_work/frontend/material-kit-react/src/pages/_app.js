@@ -33,7 +33,7 @@ const App = (props) => {
   const message = async()=> {
       try{
           let res = await axios.get('http://127.0.0.1:8001/');
-          let result = res.data;
+          let result = res.data;          
           setResult(result);
       } catch(e){
           console.log(e);
