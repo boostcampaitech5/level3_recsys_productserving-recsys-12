@@ -48,7 +48,7 @@ const App = (props) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <title>
-          Devias Kit Main
+          Music Recommendation
         </title>
         <meta
           name="viewport"

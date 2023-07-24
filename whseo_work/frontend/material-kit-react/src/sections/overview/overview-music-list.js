@@ -21,7 +21,7 @@ import { useState, useEffect} from 'react';
 import axios from 'axios';
 import { useAuth } from 'src/hooks/use-auth';
 
-export const OverviewLatestProducts = (props) => {
+export const OverviewMusicList = (props) => {
   const { products = [], sx } = props;
   const auth = useAuth();
 
@@ -33,7 +33,7 @@ export const OverviewLatestProducts = (props) => {
         let res = await axios.get(url);
         let result = res.data;          
         setResult(result);
-        //alert(JSON.stringify(result));
+        alert(JSON.stringify(result));
   
     }catch(e){
         //alert(e);
@@ -42,30 +42,30 @@ export const OverviewLatestProducts = (props) => {
   }
   
   useEffect(() =>{
-   getRecommMusciList();
+   //getRecommMusciList();
   }, []);
 
   return (
     
     <Card sx={sx}>
-      <CardHeader title="추천된 음악 리스트"/>
+      <CardHeader title="음악 리스트" />
       <List>
-        {result.map((result, index) => {
-          const hasDivider = index < result.length - 1;
-          //const ago = formatDistanceToNow(product.updatedAt);
+        {products.map((product, index) => {
+          const hasDivider = index < products.length - 1;
+          const ago = formatDistanceToNow(product.updatedAt);
 
           return (
             <ListItem
               divider={hasDivider}
-              key={result.id}
+              key={product.id}
             >
               <ListItemAvatar>
                 {
-                  products[0].image
+                  product.image
                     ? (
                       <Box
                         component="img"
-                        src={products[index].image}
+                        src={product.image}
                         sx={{
                           borderRadius: 1,
                           height: 48,
@@ -86,9 +86,9 @@ export const OverviewLatestProducts = (props) => {
                 }
               </ListItemAvatar>
               <ListItemText
-                primary={result.title}
+                primary={product.name}
                 primaryTypographyProps={{ variant: 'subtitle1' }}
-                secondary={result.artist}
+                secondary={`Updated ${ago} ago`}
                 secondaryTypographyProps={{ variant: 'body2' }}
               />
               <IconButton edge="end">
@@ -119,7 +119,7 @@ export const OverviewLatestProducts = (props) => {
   );
 };
 
-OverviewLatestProducts.propTypes = {
+OverviewMusicList.propTypes = {
   products: PropTypes.array,
   sx: PropTypes.object
 };

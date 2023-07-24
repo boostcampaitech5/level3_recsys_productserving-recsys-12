@@ -143,7 +143,6 @@ def save_diary(data : dirayRequest):
 async def get_recomm_musiclist(username):
     db = sessionLocal()
     print(username)
-    #result = get_recomm_musics(db=db, uname=username)
-    return {
-        "status" : "TEST"
-        }
+    result = get_recomm_musics(db=db, uname=username)
+    
+    return result
