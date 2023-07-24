@@ -1,5 +1,5 @@
 from ytmusicapi import YTMusic
-from youtube_config import OAUTH_PATH
+from .youtube_config import OAUTH_PATH
 
 def load_youtube(artist, name):
     yt = YTMusic(OAUTH_PATH)#yt = YTMusic('oauth.json')

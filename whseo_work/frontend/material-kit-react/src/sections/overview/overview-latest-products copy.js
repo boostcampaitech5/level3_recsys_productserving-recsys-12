@@ -17,39 +17,12 @@ import {
   SvgIcon
 } from '@mui/material';
 
-import { useState, useEffect} from 'react';
-import axios from 'axios';
-import { useAuth } from 'src/hooks/use-auth';
-
-
 export const OverviewLatestProducts = (props) => {
   const { products = [], sx } = props;
-  const auth = useAuth();
-
-  const[result, setResult] = useState('');
-
-  async function getRecommMusciList(){
-    try{      
-        let url = 'http://localhost:8001/recomm_musiclist/' + auth.user_name;
-        let res = await axios.get(url);
-        let result = res.data;          
-        setResult(result);
-        alert(result);
-  
-    }catch(e){
-        //alert(e);
-        console.log(e);
-    }
-  }
-  
-  useEffect(() =>{
-    //getRecommMusciList();
-  }, []);
 
   return (
-    
     <Card sx={sx}>
-      <CardHeader title="추천된 음악 리스트" />
+      <CardHeader title="Latest Products" />
       <List>
         {products.map((product, index) => {
           const hasDivider = index < products.length - 1;

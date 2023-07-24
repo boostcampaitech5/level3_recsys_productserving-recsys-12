@@ -22,9 +22,11 @@ class User(Base):
     password = Column(String(20), nullable=False)
     #likes = relationship('like.Like', back_populates='user')
     # user_weight = relationship('UserWeight', uselist=False, back_populates='users')
+ #   diary = relationship('Diary', back_populates='user')
     name = Column(String(20), nullable=False, unique=True)
     
 #Base.metadata.create_all(bind=engine)
+    
 
 class CreateRequest(BaseModel):
     name : str
@@ -55,3 +57,5 @@ def get_users_all(db : Session):
 def get_user_exist(db : Session, name : str, password : str):
     result = db.query(User).filter_by(name = name, password = password).first()
     return result
+
+user_name = ""

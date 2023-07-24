@@ -2,14 +2,17 @@ from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
 
-from pydantic import BaseModel, Field
 from fastapi.encoders import jsonable_encoder
 
 from goemotions.service import emotion_cos_recommendation
 from DB.database import sessionLocal
-from DB.test.user import get_users_all, CreateRequest, get_user_exist
+from DB.test.user import get_users_all, CreateRequest, get_user_exist, get_user_id
 from youtube.youtube import load_youtube
-from DB.test.recommMusic import get_recomm_musics, RecommRequest, create_recomm_music
+from DB.test.recommMusic import save_musicList, get_recomm_musics, recommRequest
+from DB.test.like import likeRequest, check_like, change_like, create_like
+from DB.test.text import Config
+from DB.test.diary import dirayRequest, create_diary
+
 #from mymodels.user import User
 
 
@@ -28,23 +31,28 @@ app.add_middleware(
 
 
 @app.get("/")
-def root():
+async def root():
     return {"fastapi-react link success"}#{"message" : "root"}
 
-class Config(BaseModel):
-    text : str
 
 
 @app.post(path = "/recomm_music")
-def test_input_back(data : Config):
+async def test_input(data : dirayRequest):
     print(data.dict())
-    result = emotion_cos_recommendation(data.text)
+    print(data.user_name)
+    db = sessionLocal()
+    db_result = create_diary(db=db, request=data)
+    if not db_result:
+        print("SAVE DIRAY DB FAIL")
+    result = emotion_cos_recommendation(data.content)
     youtube_url = []
     for i in range(len(result)):
         url = load_youtube(artist=result[i][0], name=result[i][1])
         youtube_url.append(url)
 
     print(result)
+    db_result2 = save_musicList(db=db, user_name=data.user_name, musciList=result)
+    
     return {
         "status" : "SUCCESS",
         "musicList" : result,
@@ -52,10 +60,10 @@ def test_input_back(data : Config):
     }
 
 @app.post(path = "/recomm_music_back")
-def test_input_back(data : Config):
+async def test_input_back(data : Config):
     print(data.dict())
     artist, title = emotion_cos_recommendation(data.text)
-    youtube_url = load_youtube(artist=artist, name=title)
+    youtube_url = ""#load_youtube(artist=artist, name=title)
     print(artist, title, youtube_url)
     return {
         "status" : "SUCCESS",
@@ -77,13 +85,13 @@ def get_db_users_all(db: Session = Depends(get_db)):
 '''
 
 @app.get(path = "/users_all")
-def get_db_users_all():
+async def get_db_users_all():
     db = sessionLocal()
     return get_users_all(db=db)
 
 
 @app.post(path="/auth/login")
-def auth_login(data : CreateRequest):
+async def auth_login(data : CreateRequest):
     print(data.dict())
     db = sessionLocal()
     result = get_user_exist(db, data.name, data.password)
@@ -93,6 +101,49 @@ def auth_login(data : CreateRequest):
         status = "None"
     else:
         status = "SUCCESS"
+        user_name = data.name
+        print(user_name)
     return{
         "status" : status
     }
+
+@app.post(path="/like")
+async def set_like(data : likeRequest):
+    print(data.dict())
+    
+    return {
+        "status" : "SUCCESS"
+    }
+    
+@app.post(path="/click_like")
+async def click_like(data : likeRequest):
+    db = sessionLocal()
+    exists, u_name, artist, title = check_like(data, db=db)
+    result = "FAIL"
+    if exists:
+        if change_like(db=db, u_name=u_name, artist=artist, title=title):
+            result = "SUCCESS"
+    else:
+        create_like(db=db, u_name=u_name, artist=artist, title=title)
+        
+    return{
+        "status" : result
+    }
+
+
+def save_diary(data : dirayRequest):
+    db = sessionLocal()
+    b_result = create_diary(db=db, request=data)
+    return{
+        "status" : b_result
+    }
+    
+
+@app.get("/recomm_musiclist/{username}")
+async def get_recomm_musiclist(username):
+    db = sessionLocal()
+    print(username)
+    #result = get_recomm_musics(db=db, uname=username)
+    return {
+        "status" : "TEST"
+        }

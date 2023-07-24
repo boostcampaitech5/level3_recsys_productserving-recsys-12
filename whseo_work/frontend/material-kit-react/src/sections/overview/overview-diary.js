@@ -14,6 +14,7 @@ import YouTube from 'react-youtube';
 
 import Carousel from 'react-material-ui-carousel';
 
+import { useAuth } from 'src/hooks/use-auth';
 
 export const OverviewDiary = (props) => {
     const router = useRouter();
@@ -34,6 +35,8 @@ export const OverviewDiary = (props) => {
     let [heart2, setheart2] = useState(false);
     let [heart3, setheart3] = useState(false);
     
+    const auth = useAuth();
+
   const onChange = (e) => {
     setText(e.target.value);
     setInputCount(e.target.value.length);
@@ -42,8 +45,9 @@ export const OverviewDiary = (props) => {
   const onClick = () => {
     //alert(text);
     try{
+      postText();
+        
         //diary.recomm(text);
-        postText();
     }
     catch(err){
 
@@ -71,17 +75,34 @@ export const OverviewDiary = (props) => {
   async function postText(){
     try{      
         const res = await axios.post('http://localhost:8001/recomm_music',{
-            text : text
+            user_name : auth.username, content : text
         });
         
         setMusicList(res.data.musicList);
         setUrlList(res.data.urlList);
         setText('');
+        setInputCount(0);
+        setheart1(false);
+        setheart2(false);
+        setheart3(false);
 
     }catch(e){
         //alert(e);
         console.log(e);
     }
+  }
+
+  async function postDiray(){
+    try{      
+      const res = await axios.post('http://localhost:8001/diary_test',{
+          user_name : auth.username, content : text
+      });
+      alert(res.data);
+    }catch(e){
+      //alert(e);
+      console.log(e);
+  }
+  
   }
     
 const opts = {
@@ -95,9 +116,26 @@ const opts = {
 
 let strCount = inputCount + " / 250자";
 
+async function postHeart(index) {
+ 
+  try{
+    alert("postHEart");
+    const res = await axios.post('http://localhost:8001/click_like',{
+      artist : musicList[index][0], title : musicList[index][1], name: auth.username
+  });
+  alert(res.data);
+  }
+  catch(err){
+
+  }
+
+};
+
+
   return (
     <Card sx={sx}>
         <CardContent>
+        <h3> {auth.username} 님 환영합니다 </h3>
             <Stack
             alignItems="flex-start"
             direction="column"
@@ -125,6 +163,7 @@ let strCount = inputCount + " / 250자";
                     type="submit"
                     variant="contained"
                     onClick={onClick}
+                    
                 >
                 recommendation
                 </Button>
@@ -135,29 +174,46 @@ let strCount = inputCount + " / 250자";
                */}
                
             </Stack>
-  
+   
             { urlList && <h4>당신을 위한 추천 노래</h4>}
-           
+            {urlList &&
                <Carousel
                 autoPlay='true'
                 interval={2000}
                 >
-                
-                <Paper> <YouTube videoId= {urlList[0]} opts={opts}  /> 
-                <Button onClick={() => { setheart2(!heart2);}} > {heart2 ? <FavoriteIcon fontSize='large' color='red'/> : <FavoriteBorderIcon fontSize='large'/>}</Button>
-                </Paper>
-                <Paper> <YouTube videoId= {urlList[1]} opts={opts} /> 
-                  <FavoriteBorderIcon  sx={{ color: pink[500] }} fontSize='large' >
-                  </FavoriteBorderIcon>
-                </Paper>
-                <Paper> <YouTube videoId= {urlList[2]} opts={opts} />
-                  <FavoriteBorderIcon  sx={{ color: pink[500] }} fontSize='large' >
-                  </FavoriteBorderIcon>
-                  </Paper>
-                  
-                  
+                <CardContent> 
+                  <h4> {musicList[0][0]} - {musicList[0][1]}</h4>
+                  {<YouTube videoId= {urlList[0]} opts={opts}  /> }
+                <Button 
+                   size="large"
+                   sx={{ mt: 3 }}
+                   type="submit"
+                   onClick = {() => { setheart1(!heart1); postHeart(0)}} > {heart1 ? <FavoriteIcon fontSize='large' sx={{ color: pink[500] }} /> : <FavoriteBorderIcon fontSize='large' sx={{ color: pink[500] }}/>}
+                   like </Button>
+                </CardContent>
+                <CardContent> 
+                <h4> {musicList[1][0]} - {musicList[1][1]}</h4>
+                  {<YouTube videoId= {urlList[1]} opts={opts} /> }
+                  <Button 
+                   size="large"
+                   sx={{ mt: 3 }}
+                   type="submit"
+                   onClick = {() => { setheart2(!heart2); postHeart(1)}} > {heart2 ? <FavoriteIcon fontSize='large' sx={{ color: pink[500] }} /> : <FavoriteBorderIcon fontSize='large' sx={{ color: pink[500] }}/>}
+                   like </Button>
+                </CardContent>
+                <CardContent> 
+                <h4> {musicList[2][0]} - {musicList[2][1]}</h4>
+                  {<YouTube videoId= {urlList[2]} opts={opts} />}
+                  <Button 
+                   size="large"
+                   sx={{ mt: 3 }}
+                   type="submit"
+                   onClick = {() => { setheart3(!heart3); postHeart(2)}} > {heart3 ? <FavoriteIcon fontSize='large' sx={{ color: pink[500] }} /> : <FavoriteBorderIcon fontSize='large' sx={{ color: pink[500] }}/>}
+                   like </Button>
+                  </CardContent>                  
                </Carousel>
-
+              }
+      
         </CardContent>
     </Card>
 
@@ -174,5 +230,6 @@ function DiaryText(props){
 
 OverviewDiary.prototypes = {
     strInput : PropTypes.strInput,
-    sx: PropTypes.object
+    sx: PropTypes.object,
+    username : PropTypes.username
 }
