@@ -82,7 +82,7 @@ const Page = () => (
                 },
                 {
                   id: 'bcad5524fe3a2f8f8620ceda',
-                  image: '/assets/products/musci5.png',
+                  image: '/assets/products/music5.png',
                   name: 'Healthcare Ritual',
                   updatedAt: subDays(subHours(now, 5), 6).getTime()
                 }

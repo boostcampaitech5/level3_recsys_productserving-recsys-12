@@ -165,8 +165,8 @@ export const AuthProvider = (props) => {
         });
 
     }catch(e){
-        alert(e);
-        console.log(e);
+      console.log(e);
+      //alert(e);
     }
   }
 
@@ -209,7 +209,7 @@ export const AuthProvider = (props) => {
           name : name,
           password : password
       });
-      alert(res.data);
+      //alert(res.data);
 
     }catch(e){
       console.log(e);

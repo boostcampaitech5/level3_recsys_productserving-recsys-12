@@ -14,7 +14,7 @@ export const DiaryProvider = (props) => {
     const[result, setResult] = useState(null);
     const message = async()=> {
         try{
-            let res = await axios.get('http://127.0.0.1:8001/input');
+            let res = await axios.get('http://localhost:8001/input');
             let result = res.data;
             setResult(result);
         } catch(e){

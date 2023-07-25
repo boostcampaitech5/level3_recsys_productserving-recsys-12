@@ -97,7 +97,7 @@ export const OverviewDiary = (props) => {
       const res = await axios.post('http://localhost:8001/diary_test',{
           user_name : auth.username, content : text
       });
-      alert(res.data);
+      //alert(res.data);
     }catch(e){
       //alert(e);
       console.log(e);
@@ -119,11 +119,10 @@ let strCount = inputCount + " / 250자";
 async function postHeart(index) {
  
   try{
-    alert("postHEart");
-    const res = await axios.post('http://localhost:8001/click_like',{
+      const res = await axios.post('http://localhost:8001/click_like',{
       artist : musicList[index][0], title : musicList[index][1], name: auth.username
   });
-  alert(res.data);
+  
   }
   catch(err){
 

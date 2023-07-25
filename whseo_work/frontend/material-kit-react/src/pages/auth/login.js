@@ -80,8 +80,8 @@ const Page = () => {
         }
 
     }catch(e){
-        alert(e);
-        console.log(e);
+      console.log(e);
+      //alert(e);
     }
   }
 

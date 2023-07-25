@@ -33,7 +33,7 @@ export const OverviewMusicList = (props) => {
         let res = await axios.get(url);
         let result = res.data;          
         setResult(result);
-        alert(JSON.stringify(result));
+        //alert(JSON.stringify(result));
   
     }catch(e){
         //alert(e);
