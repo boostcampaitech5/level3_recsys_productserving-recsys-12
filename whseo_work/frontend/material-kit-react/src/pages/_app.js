@@ -41,7 +41,7 @@ const App = (props) => {
   };
 
   useEffect(() =>{
-      message();
+      //message();
   }, []);
 
   return (

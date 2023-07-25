@@ -33,11 +33,15 @@ class CreateRequest(BaseModel):
     password : str
 
 def create_user(request: CreateRequest, db: Session):
-    new_user = User(password=request.password, name=request.name)
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-    return new_user
+    b_result = True
+    try :
+        new_user = User(password=request.password, name=request.name)
+        db.add(new_user)
+        db.commit()
+        db.refresh(new_user)
+    except:
+        b_result = False
+    return b_result
 
 def get_user_id(user_name, db: Session):
     user = db.query(User).filter(User.name==user_name).first()

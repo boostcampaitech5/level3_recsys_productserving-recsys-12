@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ArrowRightIcon from '@heroicons/react/24/solid/ArrowRightIcon';
 import EllipsisVerticalIcon from '@heroicons/react/24/solid/EllipsisVerticalIcon';
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -26,14 +27,23 @@ export const OverviewLatestProducts = (props) => {
   const auth = useAuth();
 
   const[result, setResult] = useState('');
+  
+  const [listState, setListState] = useState(Boolean);
 
   async function getRecommMusciList(){
     try{      
         let url = "http://localhost:8001/recomm_musiclist/"+auth.username ;
         let res = await axios.get(url);
         let result = res.data;          
-        setResult(result);
-        //alert(JSON.stringify(result));
+        if(result.data != "none}"){
+          setResult(result);
+          setListState(true);
+          //alert(JSON.stringify(result));
+        }
+        else{
+          setResult('');
+          setListState(false);
+        }
   
     }catch(e){
         //alert(e);
@@ -42,15 +52,19 @@ export const OverviewLatestProducts = (props) => {
   }
   
   useEffect(() =>{
-   getRecommMusciList();
+    if(auth.username){
+      getRecommMusciList();
+    }
   }, []);
+  
 
   return (
     
     <Card sx={sx}>
       <CardHeader title="추천된 음악 리스트"/>
+      {listState &&
       <List>
-        {result.map((result, index) => {
+        { result.map((result, index) => {
           const hasDivider = index < result.length - 1;
           //const ago = formatDistanceToNow(product.updatedAt);
 
@@ -100,6 +114,7 @@ export const OverviewLatestProducts = (props) => {
           );
         })}
       </List>
+      }
       <Divider />
       <CardActions sx={{ justifyContent: 'flex-end' }}>
         <Button

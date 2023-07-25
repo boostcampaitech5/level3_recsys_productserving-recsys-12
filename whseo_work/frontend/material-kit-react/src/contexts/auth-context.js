@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { bool } from 'prop-types';
 
 import axios from 'axios';
 
@@ -67,6 +67,7 @@ export const AuthProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const initialized = useRef(false);
   const [username, setUsername] = useState('');
+  const [loginState, setLoginState] = useState(Boolean);
 
   const initialize = async () => {
     // Prevent from calling twice in development mode with React.StrictMode enabled
@@ -140,12 +141,15 @@ export const AuthProvider = (props) => {
             password : password
         });
         if(res.data.status == "None"){
-          throw new Error('Please check your email and password');
+          setLoginState(false);
+          throw new Error('Please check your name and password');
+          
         }
         else{
+          setLoginState(true);
           window.sessionStorage.setItem('authenticated', 'true');
         }
-        
+
         const user = {
           id: '5e86809283e28b96d2d38537',
           avatar: '/assets/avatars/avatar-anika-visser.png',
@@ -192,8 +196,26 @@ export const AuthProvider = (props) => {
     });
   };*/
 
+/*
   const signUp = async (email, name, password) => {
     throw new Error('Sign up is not implemented');
+  };
+*/
+  
+  const signUp = async (name, password) => {
+    
+    try{      
+      const res = await axios.post('http://localhost:8001/auth/register',{
+          name : name,
+          password : password
+      });
+      alert(res.data);
+
+    }catch(e){
+      console.log(e);
+      throw new Error('Sign up is not implemented');
+      //alert(e);
+    }
   };
 
   const signOut = () => {
@@ -210,7 +232,8 @@ export const AuthProvider = (props) => {
         signIn,
         signUp,
         signOut,
-        username
+        username,
+        loginState
       }}
     >
       {children}

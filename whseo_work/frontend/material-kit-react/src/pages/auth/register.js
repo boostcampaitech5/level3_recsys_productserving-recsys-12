@@ -12,22 +12,23 @@ const Page = () => {
   const auth = useAuth();
   const formik = useFormik({
     initialValues: {
-      email: '',
-      //name: '',
+      //email: '',
+      name: '',
       password: '',
       submit: null
     },
     validationSchema: Yup.object({
+      /*
       email: Yup
         .string()
         .email('Must be a valid email')
         .max(255)
         .required('Email is required'),
-        /*
+        */
       name: Yup
         .string()
         .max(255)
-        .required('Name is required'),*/
+        .required('Name is required'),
       password: Yup
         .string()
         .max(255)
@@ -36,8 +37,8 @@ const Page = () => {
     onSubmit: async (values, helpers) => {
       try {
         //await auth.signUp(values.email, values.name, values.password);
-        await auth.signUp(values.email, values.password);
-        router.push('/');
+        await auth.signUp(values.name, values.password);
+        router.push('/auth/login');
       } catch (err) {
         helpers.setStatus({ success: false });
         helpers.setErrors({ submit: err.message });
@@ -50,7 +51,7 @@ const Page = () => {
     <>
       <Head>
         <title>
-          Register | Devias Kit
+          Register | music
         </title>
       </Head>
       <Box
@@ -98,8 +99,6 @@ const Page = () => {
               onSubmit={formik.handleSubmit}
             >
               <Stack spacing={3}>
-                {
-                  /*
                 <TextField
                   error={!!(formik.touched.name && formik.errors.name)}
                   fullWidth
@@ -109,9 +108,9 @@ const Page = () => {
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
                   value={formik.values.name}
-                />
-                */}
+                  />
                 
+                {/*
                 <TextField
                   error={!!(formik.touched.email && formik.errors.email)}
                   fullWidth
@@ -123,6 +122,7 @@ const Page = () => {
                   type="email"
                   value={formik.values.email}
                 />
+                */}
                 <TextField
                   error={!!(formik.touched.password && formik.errors.password)}
                   fullWidth

@@ -6,9 +6,9 @@ from fastapi.encoders import jsonable_encoder
 
 from goemotions.service import emotion_cos_recommendation
 from DB.database import sessionLocal
-from DB.test.user import get_users_all, CreateRequest, get_user_exist, get_user_id
+from DB.test.user import get_users_all, CreateRequest, get_user_exist, create_user
 from youtube.youtube import load_youtube
-from DB.test.recommMusic import save_musicList, get_recomm_musics, recommRequest
+from DB.test.recommMusic import save_musicList, get_recomm_musics, check_recomm_musics
 from DB.test.like import likeRequest, check_like, change_like, create_like
 from DB.test.text import Config
 from DB.test.diary import dirayRequest, create_diary
@@ -106,6 +106,19 @@ async def auth_login(data : CreateRequest):
     return{
         "status" : status
     }
+    
+    
+@app.post(path="/auth/register")
+async def auth_register(data: CreateRequest):
+    db = sessionLocal()
+    b_result = create_user(request=data, db=db)
+    result = "SUCCESS"
+    if not b_result:
+        result = "FAIL"
+    return {
+        "status" : result
+    }
+    
 
 @app.post(path="/like")
 async def set_like(data : likeRequest):
@@ -143,6 +156,6 @@ def save_diary(data : dirayRequest):
 async def get_recomm_musiclist(username):
     db = sessionLocal()
     print(username)
-    result = get_recomm_musics(db=db, uname=username)
+    result = check_recomm_musics(db, username)#get_recomm_musics(db=db, uname=username)
     
     return result

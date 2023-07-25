@@ -37,15 +37,21 @@ def create_recomm_music(db: Session, user_id, artist, title):
     print(artist, title, b_result)
     return b_result
 
-def get_recomm_musics(db: Session, uname : str):
-    user_id = get_user_id(user_name=uname, db=db)
-    try:
-        db = db.query(RecommMusic).filter_by(user_id = user_id).offset(0).limit(5).all()
-    except:
-        return {"status" : "DB FAIL"}
-    print(db)
+def check_recomm_musics(db:Session, unmae: str):
+    user_id = get_user_id(user_name=unmae, db=db)
+    result = db.query(RecommMusic).filter_by(user_id=user_id).first()
+    if result:
+        return get_recomm_musics(db=db, user_id=user_id)
+    return {"none"}
+
+def get_recomm_musics(db: Session, user_id : str):
+    #user_id = get_user_id(user_name=uname, db=db)
+    result = db.query(RecommMusic).filter_by(user_id = user_id).offset(0).limit(5).all()
+    if result :
+        return result
+    print(result)
     #data = jsonable_encoder(db)
-    return db
+    return {"DB FAIL"}
 
 
 def save_musicList(db: Session, user_name, musciList):

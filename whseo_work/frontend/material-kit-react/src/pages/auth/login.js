@@ -20,14 +20,13 @@ import { useAuth } from 'src/hooks/use-auth';
 import { Layout as AuthLayout } from 'src/layouts/auth/layout';
 
 import axios from 'axios';
-import { bool } from 'prop-types';
 
 const Page = () => {
   const router = useRouter();
   const auth = useAuth();
   const [method, setMethod] = useState('email');
 
-  let loginok = false;
+  let loginok = auth.loginState;
 
   const formik = useFormik({
     initialValues: {
@@ -55,7 +54,9 @@ const Page = () => {
     onSubmit: async (values, helpers) => {
       try {
         await auth.signIn(values.name, values.password);
-        router.push('/');
+        if(auth.loginState == true){
+          router.push('/');
+        }
         //postLogin(values.name, values.password);
       } catch (err) {
         helpers.setStatus({ success: false });
