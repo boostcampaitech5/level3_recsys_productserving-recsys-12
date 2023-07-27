@@ -1,3 +1,6 @@
+<div align='center'>
+      # DiaryVibes
+</div>
 
 ## 1. Introduction
 
@@ -12,7 +15,7 @@
 일기 작성 후, 추천 버튼을 누르면 오늘 나와 맞는 **세 곡의 노래**를 바로 들을 수 있습니다.
 
 </div>
-
+<br></br>
 **Project Objective**
 
 - 일기 감정 분석 → 노래 추천
@@ -24,14 +27,14 @@
 기존 서비스는 사용자의 청취 이력을 토대로 취향을 분석하여 음악을 추천합니다.
 
 하지만 ‘슬플 때 듣는 플레이리스트’, ‘행복할 때 듣는 플레이리스트’와 같이 그 때의 기분에 따라 음악을 듣고 싶을 때도 있습니다. 이러한 생각을 바탕으로 그 날의 감정에 따라 노래를 추천해주는 서비스인 ‘DiaryVibes’를 기획하게 되었습니다.
-
+<br></br>
 ## 2. Demonstration
 
 
 **서비스 시연 영상**
 
 **서비스 제한 사항**
-
+<br></br>
 ## 3. Service Architecture
 
 
@@ -42,9 +45,9 @@
 **모델 흐름**
 
 ![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/ebe56ba2-8cea-45e3-a3d8-e35b0de9b881)
-
+<br></br>
 ---
 
 **🕵️Members🕵️**
 
-![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/10e161b8-2599-41ca-961f-7b8026f1e4b7)
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/f08c43e3-0fda-446f-b58f-7a768937b334)
