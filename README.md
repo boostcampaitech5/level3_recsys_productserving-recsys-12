@@ -5,11 +5,13 @@
 
 ### “오늘 당신에게 딱 맞는 음악을 추천 해 드립니다.”
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4a5e3616-2d92-4366-bd10-ea65d10ede0b/Untitled.png)
-
-DiaryVibes는 사용자 일기의 감정을 분석하여 **그 날의 감정**에 따른 노래를 추천 해 줍니다.
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/d9584e7d-6ae1-4a44-9801-2e129c44bc59)
+<div align='center'>
+      DiaryVibes는 사용자 일기의 감정을 분석하여 **그 날의 감정**에 따른 노래를 추천 해 줍니다.
 
 일기 작성 후, 추천 버튼을 누르면 오늘 나와 맞는 **세 곡의 노래**를 바로 들을 수 있습니다.
+
+</div>
 
 **Project Objective**
 
@@ -25,7 +27,6 @@ DiaryVibes는 사용자 일기의 감정을 분석하여 **그 날의 감정**�
 
 ## 2. Demonstration
 
----
 
 **서비스 시연 영상**
 
@@ -33,15 +34,14 @@ DiaryVibes는 사용자 일기의 감정을 분석하여 **그 날의 감정**�
 
 ## 3. Service Architecture
 
----
 
 **서비스 흐름**
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f12395b1-9c89-43c8-b84b-c216cf1502ea/Untitled.png)
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/034ff5b7-1b2a-4786-a5c2-088e45778aab)
 
 **모델 흐름**
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f44cd400-28f8-451d-a10d-158db60473bd/Untitled.png)
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/ebe56ba2-8cea-45e3-a3d8-e35b0de9b881)
 
 ---
 
@@ -50,14 +50,11 @@ DiaryVibes는 사용자 일기의 감정을 분석하여 **그 날의 감정**�
 |         권수현(T5016) |         서우현(T5106) |         이원섭(T5146) |         정상혁(T5191) |
 | --- | --- | --- | --- |
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/74cb86ef-d045-4d2c-a0d5-3b9fbfb126c8/Untitled.png)
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/94403941-b015-4d08-bd75-5f2f9670c5dc)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e171579e-54cc-445b-b007-86acaad59a3f/Untitled.png)
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6f8e9a07-9b4a-404c-92d0-3aee3bbd8041/Untitled.png)
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/16073700-c5fd-40aa-8d0e-58bff4df253a/Untitled.png)
-
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/29a83a06-3d04-4217-acd0-b3489eba1c22)
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/44f554bc-fa6e-40c9-8382-7945abc668d8)
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/2c446915-e990-47aa-bdcc-c27417ac9c31)
 |              프론트
       데이터 전처리
            모델 설계 |       데이터베이스
