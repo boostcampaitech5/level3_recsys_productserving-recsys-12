@@ -47,21 +47,4 @@
 
 **🕵️Members🕵️**
 
-|         권수현(T5016) |         서우현(T5106) |         이원섭(T5146) |         정상혁(T5191) |
-| --- | --- | --- | --- |
-
-![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/94403941-b015-4d08-bd75-5f2f9670c5dc)
-
-![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/29a83a06-3d04-4217-acd0-b3489eba1c22)
-![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/44f554bc-fa6e-40c9-8382-7945abc668d8)
-![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/2c446915-e990-47aa-bdcc-c27417ac9c31)
-|              프론트
-      데이터 전처리
-           모델 설계 |       데이터베이스
-            백엔드
-            프론트 |          데이터베이스 
-            모델 설계
-          모델 전처리 |          아이디어 기획
-  모델 설계 및 모델 실험
-          데이터 전처리 |
-| --- | --- | --- | --- |
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/10e161b8-2599-41ca-961f-7b8026f1e4b7)
