@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi.encoders import jsonable_encoder
 
-from goemotions.service import emotion_cos_recommendation
+from goemotions.service import emotion_cos_recommendation, test_emotion_cos_recommendation
 from DB.database import sessionLocal
 from DB.test.user import get_users_all, CreateRequest, get_user_exist, create_user
 from youtube.youtube import load_youtube
@@ -23,20 +23,26 @@ origins = [
 ]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins= origins, #["*"]
+    allow_origins= ["*"], #origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
-@app.get("/")
+@app.get("/api/")
 async def root():
     return {"fastapi-react link success"}#{"message" : "root"}
 
 
+@app.post(path = "/api/recomm_music_back")
+async def test_input(data : dirayRequest):
+    print(data.dict())
+    print(data.user_name)
+    result = test_emotion_cos_recommendation(data.content)
+    print(result)
 
-@app.post(path = "/recomm_music")
+@app.post(path = "/api/recomm_music")
 async def test_input(data : dirayRequest):
     print(data.dict())
     print(data.user_name)
@@ -90,7 +96,7 @@ async def get_db_users_all():
     return get_users_all(db=db)
 
 
-@app.post(path="/auth/login")
+@app.post(path="/api/auth/login")
 async def auth_login(data : CreateRequest):
     print(data.dict())
     db = sessionLocal()
@@ -108,7 +114,7 @@ async def auth_login(data : CreateRequest):
     }
     
     
-@app.post(path="/auth/register")
+@app.post(path="/api/auth/register")
 async def auth_register(data: CreateRequest):
     db = sessionLocal()
     b_result = create_user(request=data, db=db)
@@ -120,7 +126,7 @@ async def auth_register(data: CreateRequest):
     }
     
 
-@app.post(path="/like")
+@app.post(path="/api/like")
 async def set_like(data : likeRequest):
     print(data.dict())
     
@@ -128,7 +134,7 @@ async def set_like(data : likeRequest):
         "status" : "SUCCESS"
     }
     
-@app.post(path="/click_like")
+@app.post(path="/api/click_like")
 async def click_like(data : likeRequest):
     db = sessionLocal()
     exists, u_name, artist, title = check_like(data, db=db)
@@ -152,7 +158,7 @@ def save_diary(data : dirayRequest):
     }
     
 
-@app.get("/recomm_musiclist/{username}")
+@app.get("/api/recomm_musiclist/{username}")
 async def get_recomm_musiclist(username):
     db = sessionLocal()
     print(username)

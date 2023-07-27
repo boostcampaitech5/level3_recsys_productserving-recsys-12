@@ -6,7 +6,38 @@ from sklearn.metrics.pairwise import manhattan_distances
 import numpy as np
 import pandas as pd
 
-from .filepath import LAST_DATA_PATH
+from .filepath import LAST_DATA_PATH, TEMP_DATA_PATH
+
+def test_cosine_sim_output(analysis_result):
+    print("test_cosine_sim")
+    #result = pd.read_csv(TEMP_DATA_PATH, encoding="utf-8")
+    for i in analysis_result:
+        a_list = i["scores"]
+        b_list = i["labels"]
+    new = pd.DataFrame([a_list], columns=b_list)
+
+    new['anger'] = new['anger']+new['annoyance']+new['disgust']
+    new['sadness'] = new['sadness']+new['grief']
+    new['joy'] = new['joy']+new['amusement']
+    new['confusion'] = new['confusion']+new['nervousness']
+    new['disappointment'] = new['disappointment']+new['remorse']
+    new['admiration'] = new['admiration']+new['surprise']
+
+    new = new.drop(['annoyance','disgust','grief','amusement','nervousness','remorse','surprise'], axis=1)
+
+    #temp = result['weight']
+    temp = pd.read_csv(TEMP_DATA_PATH, encoding="utf-8")
+
+    cosine_sim = cosine_similarity(temp,[new.iloc[0]])
+ 
+    indx = np.argsort(cosine_sim, axis=0)
+    indx = indx[-3:] # top-K 
+
+    topk = temp.iloc[indx[0]]
+    for i in indx[1::]:
+        topk = pd.concat([topk, temp.iloc[i]], axis=0)
+    
+    return topk
 
 def cosine_sim_output(analysis_result):
     
