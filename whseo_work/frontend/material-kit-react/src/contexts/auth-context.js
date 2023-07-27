@@ -104,7 +104,6 @@ export const AuthProvider = (props) => {
     }
   };
 
-  
 
   useEffect(
     () => {
@@ -136,7 +135,7 @@ export const AuthProvider = (props) => {
 
   const signIn = async (name, password) =>{
     try{      
-        const res = await axios.post('http://localhost:8001/auth/login',{
+        const res = await axios.post('http://localhost:8001/api/auth/login',{
             name : name,
             password : password
         });
@@ -149,7 +148,7 @@ export const AuthProvider = (props) => {
           setLoginState(true);
           window.sessionStorage.setItem('authenticated', 'true');
         }
-
+        
         const user = {
           id: '5e86809283e28b96d2d38537',
           avatar: '/assets/avatars/avatar-anika-visser.png',
@@ -205,7 +204,7 @@ export const AuthProvider = (props) => {
   const signUp = async (name, password) => {
     
     try{      
-      const res = await axios.post('http://localhost:8001/auth/register',{
+      const res = await axios.post('http://localhost:8001/api/auth/register',{
           name : name,
           password : password
       });

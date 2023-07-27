@@ -32,7 +32,7 @@ export const OverviewLatestProducts = (props) => {
 
   async function getRecommMusciList(){
     try{      
-        let url = "http://localhost:8001/recomm_musiclist/"+auth.username ;
+        let url = "http://localhost:8001/api/recomm_musiclist/"+auth.username ;
         let res = await axios.get(url);
         let result = res.data;          
         if(result.data != "none}"){

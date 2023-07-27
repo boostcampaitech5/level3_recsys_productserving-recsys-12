@@ -68,7 +68,7 @@ const Page = () => {
   
   async function postLogin(name, password){
     try{      
-        const res = await axios.post('http://localhost:8001/auth/login',{
+        const res = await axios.post('http://localhost:8001/api/auth/login',{
             name : name,
             password : password
         });

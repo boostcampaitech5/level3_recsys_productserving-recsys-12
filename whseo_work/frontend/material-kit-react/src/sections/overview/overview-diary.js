@@ -57,7 +57,7 @@ export const OverviewDiary = (props) => {
 
   async function postText_back(){
     try{      
-        const res = await axios.post('http://localhost:8001/recomm_music_back',{
+        const res = await axios.post('http://localhost:8001/api/recomm_music_back',{
             text : text
         });
         setArtist(res.data.artist);
@@ -74,7 +74,7 @@ export const OverviewDiary = (props) => {
 
   async function postText(){
     try{      
-        const res = await axios.post('http://localhost:8001/recomm_music',{
+        const res = await axios.post('http://localhost:8001/api/recomm_music',{
             user_name : auth.username, content : text
         });
         
@@ -94,7 +94,7 @@ export const OverviewDiary = (props) => {
 
   async function postDiray(){
     try{      
-      const res = await axios.post('http://localhost:8001/diary_test',{
+      const res = await axios.post('http://localhost:8001/api/diary_test',{
           user_name : auth.username, content : text
       });
       //alert(res.data);
@@ -119,7 +119,7 @@ let strCount = inputCount + " / 250자";
 async function postHeart(index) {
  
   try{
-      const res = await axios.post('http://localhost:8001/click_like',{
+      const res = await axios.post('http://localhost:8001/api/click_like',{
       artist : musicList[index][0], title : musicList[index][1], name: auth.username
   });
   
@@ -178,7 +178,7 @@ async function postHeart(index) {
             {urlList &&
                <Carousel
                 autoPlay='true'
-                interval={2000}
+                interval={10000}
                 >
                 <CardContent> 
                   <h4> {musicList[0][0]} - {musicList[0][1]}</h4>
