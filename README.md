@@ -50,4 +50,5 @@
 
 **🕵️Members🕵️**
 
-![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/f08c43e3-0fda-446f-b58f-7a768937b334)
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/5fc29983-bb40-493d-b611-64fa46566b20)
+
