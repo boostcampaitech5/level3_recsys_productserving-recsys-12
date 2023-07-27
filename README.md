@@ -1,28 +1,31 @@
-<div align='center'>
-      # DiaryVibes
-</div>
+<h1 align='center'>
+      DiaryVibes
+</h1>
+<br></br>
 
 ## 1. Introduction
-
-
 
 ### “오늘 당신에게 딱 맞는 음악을 추천 해 드립니다.”
 
 ![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/d9584e7d-6ae1-4a44-9801-2e129c44bc59)
 <div align='center'>
-      DiaryVibes는 사용자 일기의 감정을 분석하여 **그 날의 감정**에 따른 노래를 추천 해 줍니다.
+      DiaryVibes는 사용자 일기의 감정을 분석하여 
+      <u>그 날의 감정</u>
+      에 따라 노래를 추천 해 줍니다.
 
 일기 작성 후, 추천 버튼을 누르면 오늘 나와 맞는 **세 곡의 노래**를 바로 들을 수 있습니다.
 
 </div>
 <br></br>
+
+
 **Project Objective**
 
 - 일기 감정 분석 → 노래 추천
 - 일기 및 추천 노래 저장
 - 사용자 계정 관리
 
-### background
+<h3 color='yellow'>background</h3>
 
 기존 서비스는 사용자의 청취 이력을 토대로 취향을 분석하여 음악을 추천합니다.
 
@@ -41,7 +44,7 @@
 **서비스 흐름**
 
 ![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/034ff5b7-1b2a-4786-a5c2-088e45778aab)
-
+<br></br>
 **모델 흐름**
 
 ![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/ebe56ba2-8cea-45e3-a3d8-e35b0de9b881)
