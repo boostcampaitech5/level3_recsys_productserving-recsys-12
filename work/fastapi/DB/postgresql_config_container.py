@@ -1,0 +1,5 @@
+P_USER = 'postgres'
+P_PASSWORD = '950322'
+P_HOST = 'postgres'
+P_PORT = '5432'
+P_DB = 'musicweb'
