@@ -1,6 +1,4 @@
-<h1 align='center'>
-      DiaryVibes
-</h1>
+![KakaoTalk_20230727_180402095](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/21667896-4b7f-4117-a3c6-5ff10a899dbe)
 <br></br>
 
 ## 1. Introduction
