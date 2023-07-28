@@ -35,8 +35,9 @@
 
 
 **서비스 시연 영상**
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/6b9ebafb-6cca-4f28-b0f2-97d4a8120db5)
 
-**서비스 제한 사항**
+
 <br></br>
 ## 3. Service Architecture
 
