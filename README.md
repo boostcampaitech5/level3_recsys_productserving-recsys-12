@@ -18,7 +18,7 @@
 
 
 **Web Service**
-
+![ser](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/502a1a58-b259-48a8-be2d-00605940f1fa)
 - 일기 감정 분석 → 노래 추천
 - 일기 및 추천 노래 저장
 - 사용자 계정 관리
@@ -32,7 +32,7 @@
 하지만 ‘슬플 때 듣는 플레이리스트’, ‘행복할 때 듣는 플레이리스트’와 같이 그 때의 기분에 따라 음악을 듣고 싶을 때도 있습니다. 
 
 이러한 생각을 바탕으로 그 날의 감정에 따라 노래를 추천해주는 서비스인 ‘DiaryVibes’를 기획하게 되었습니다.
-<br></br>
+<br></br><br></br>
 ## 3. Demonstration
 
 
@@ -56,6 +56,7 @@
 
 - [GoEmotions-Korean](https://github.com/monologg/GoEmotions-Korean)
 - [Streamlit](https://github.com/streamlit/streamlit)
+- [ALS 참고](https://medium.com/radon-dev/als-implicit-collaborative-filtering-5ed653ba39fe)
 <br></br>
 **🕵️Members🕵️**
 
