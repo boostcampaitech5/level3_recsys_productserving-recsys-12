@@ -65,16 +65,14 @@
 ## 6. Follow-up development
 
 **Music Dataset**
+![후속1](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/30d06389-a07a-4675-9df2-69762dbd4745)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e57f601f-559c-4f3d-965c-07adf3bd1f9f/Untitled.png)
-
-- 기존에는 앨범 소개를 바탕으로 노래의 감정 분석을 하였다면 노래 별 가사의 감정을 분석하여
+- 기존에는 앨범 소개를 바탕으로 노래의 감정 분석을 하였다면 노래 별 가사의 감정을 분석하여 노래마다 감정분석 정확도를 높일 예정입니다. 
 
 **Song2Vec**
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5c3670ce-09b3-4565-9195-50e9c0a08a63/Untitled.png)
-
+![후속2](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/aa267d6f-ae12-454c-b036-3731df8685f7)
 - song2vec은 word2vec을 기반으로 하여, 단어 대신 플레이리스트의 '문맥'을 학습한 다음, 가장 비슷한 패턴을 파악해서 추천을 하게 됩니다. 결국 플레이리스트의 순서와 범위 등에 영향을 미치고, 장르, 년도, 감정 등 외부적인 요소는 전혀 고려되지 않습니다. 따라서 다양한 추가데이터로서 장르, 감정, 유저 피드백 등을 고려한 협업 필터링 추천 시스템으로 발전시킬 예정입니다.
+<br></br>  <br></br>  <br></br>
 ## Reference
 
 - [GoEmotions-Korean](https://github.com/monologg/GoEmotions-Korean)
