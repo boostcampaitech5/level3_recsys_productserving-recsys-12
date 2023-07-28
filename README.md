@@ -51,12 +51,23 @@
 ## 5. Product Serving
 **Service Architecture**
 ![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/034ff5b7-1b2a-4786-a5c2-088e45778aab)
-<br></br>
+- Frontend - React, Next.js
+- Backend - Fastapi, Python, Pytorch, SQLAlchemy
+- DB
+    - MYSql  
+        유저 정보, 다이어리 정보, 추천된 음악 리스트, 좋아요 누른 음악 리스트를 저장하여 유저 피드백에 사용될 수 있도록 구현하였습니다.     
+- Docker
+    - Frontend docker image : [codenee/frontend-web](https://hub.docker.com/repository/docker/codenee/frontend-web/general)
+    - Backend docker image : [codenee/backend-api](https://hub.docker.com/repository/docker/codenee/backend-api/general)
+    
+    React와 Fastapi로 구현한 웹 페이지를 각각 도커 이미지로 만들어 도커 허브에 업로드하였습니다. docker-compose를 통해 배포할 수 있도록 하였습니다.
+  <br></br>
 ## Reference
 
 - [GoEmotions-Korean](https://github.com/monologg/GoEmotions-Korean)
 - [Streamlit](https://github.com/streamlit/streamlit)
 - [ALS 참고](https://medium.com/radon-dev/als-implicit-collaborative-filtering-5ed653ba39fe)
+- [발표영상 보러가기!](https://youtu.be/oZ4JbhP2rnM)
 <br></br><br></br><br></br>
 **🕵️Members🕵️**
 
