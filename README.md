@@ -36,18 +36,18 @@
 ![시연](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/c993fa36-3a42-479c-bdf8-dd1750999cb0)
 
 <br></br>
-## 3. Service Architecture
-
-
-**서비스 흐름**
-
-![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/034ff5b7-1b2a-4786-a5c2-088e45778aab)
+## 3. Recommender System
+**Dataset**
+- Crawling - Bugs Dataset (Emotion Labeled Music)
+- Melon Dataset - KAKAO AREA
 <br></br>
-**모델 흐름**
-
+**모델 Architecture**
 ![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/ebe56ba2-8cea-45e3-a3d8-e35b0de9b881)
 <br></br>
-
+## 3. Product Serving
+**Service Architecture**
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/034ff5b7-1b2a-4786-a5c2-088e45778aab)
+<br></br>
 ## Reference
 
 - [GoEmotions-Korean](https://github.com/monologg/GoEmotions-Korean)
