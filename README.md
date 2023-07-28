@@ -47,7 +47,7 @@
 
 ![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/ebe56ba2-8cea-45e3-a3d8-e35b0de9b881)
 <br></br>
----
+
 ## Reference
 
 - [GoEmotions-Korean](https://github.com/monologg/GoEmotions-Korean)
