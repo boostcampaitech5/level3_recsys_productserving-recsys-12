@@ -33,8 +33,7 @@
 
 
 **서비스 시연 영상**
-![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/6b9ebafb-6cca-4f28-b0f2-97d4a8120db5)
-
+![시연](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/c993fa36-3a42-479c-bdf8-dd1750999cb0)
 
 <br></br>
 ## 3. Service Architecture
