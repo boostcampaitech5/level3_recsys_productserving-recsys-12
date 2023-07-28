@@ -62,6 +62,19 @@
     
     React와 Fastapi로 구현한 웹 페이지를 각각 도커 이미지로 만들어 도커 허브에 업로드하였습니다. docker-compose를 통해 배포할 수 있도록 하였습니다.
   <br></br>
+## 6. Follow-up development
+
+**Music Dataset**
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e57f601f-559c-4f3d-965c-07adf3bd1f9f/Untitled.png)
+
+- 기존에는 앨범 소개를 바탕으로 노래의 감정 분석을 하였다면 노래 별 가사의 감정을 분석하여
+
+**Song2Vec**
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5c3670ce-09b3-4565-9195-50e9c0a08a63/Untitled.png)
+
+- song2vec은 word2vec을 기반으로 하여, 단어 대신 플레이리스트의 '문맥'을 학습한 다음, 가장 비슷한 패턴을 파악해서 추천을 하게 됩니다. 결국 플레이리스트의 순서와 범위 등에 영향을 미치고, 장르, 년도, 감정 등 외부적인 요소는 전혀 고려되지 않습니다. 따라서 다양한 추가데이터로서 장르, 감정, 유저 피드백 등을 고려한 협업 필터링 추천 시스템으로 발전시킬 예정입니다.
 ## Reference
 
 - [GoEmotions-Korean](https://github.com/monologg/GoEmotions-Korean)
