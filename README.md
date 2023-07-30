@@ -1,11 +1,12 @@
-![KakaoTalk_20230727_180402095](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/21667896-4b7f-4117-a3c6-5ff10a899dbe)
+![KakaoTalk_20230727_180402095]()
 <br></br>
 
 ## 1. Introduction
 
 ### “오늘 당신에게 딱 맞는 음악을 추천 해 드립니다.”
 
-![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/d9584e7d-6ae1-4a44-9801-2e129c44bc59)
+
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/blob/main/Data/image/Intro.png)
 <div align='center'>
       DiaryVibes는 사용자 일기의 감정을 분석하여 
       <u>그 날의 감정</u>
@@ -18,7 +19,7 @@
 
 
 **Web Service**
-![ser](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/502a1a58-b259-48a8-be2d-00605940f1fa)
+![ser](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/blob/main/Data/image/service.png)
 - 일기 감정 분석 → 노래 추천
 - 일기 및 추천 노래 저장
 - 사용자 계정 관리
@@ -35,9 +36,9 @@
 <br></br><br></br>
 ## 3. Demonstration
 
-
 **서비스 시연 영상**
-![시연](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/c993fa36-3a42-479c-bdf8-dd1750999cb0)
+<br></br>
+![시연](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/blob/main/Data/image/service2.gif)
 
 <br></br>
 ## 4. Recommender System
@@ -46,11 +47,13 @@
 - Melon Dataset - KAKAO AREA
 <br></br>
 **모델 Architecture**
-![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/ebe56ba2-8cea-45e3-a3d8-e35b0de9b881)
+<br></br>
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/blob/main/Data/image/modeling.png)
 <br></br>
 ## 5. Product Serving
 **Service Architecture**
-![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/034ff5b7-1b2a-4786-a5c2-088e45778aab)
+<br></br>
+![initial](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/blob/main/Data/image/architecture.png)
 - Frontend - React, Next.js
 - Backend - Fastapi, Python, Pytorch, SQLAlchemy
 - DB
@@ -65,12 +68,14 @@
 ## 6. Follow-up development
 
 **Music Dataset**
-![후속1](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/30d06389-a07a-4675-9df2-69762dbd4745)
+<br></br>
+![후속1](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/blob/main/Data/image/followup1.png)
 
 - 기존에는 앨범 소개를 바탕으로 노래의 감정 분석을 하였다면 노래 별 가사의 감정을 분석하여 노래마다 감정분석 정확도를 높일 예정입니다. 
 
 **Song2Vec**
-![후속2](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/assets/97236643/aa267d6f-ae12-454c-b036-3731df8685f7)
+<br></br>
+![후속2](https://github.com/boostcampaitech5/level3_recsys_productserving-recsys-12/blob/main/Data/image/followup2.png)
 - song2vec은 word2vec을 기반으로 하여, 단어 대신 플레이리스트의 '문맥'을 학습한 다음, 가장 비슷한 패턴을 파악해서 추천을 하게 됩니다. 결국 플레이리스트의 순서와 범위 등에 영향을 미치고, 장르, 년도, 감정 등 외부적인 요소는 전혀 고려되지 않습니다. 따라서 다양한 추가데이터로서 장르, 감정, 유저 피드백 등을 고려한 협업 필터링 추천 시스템으로 발전시킬 예정입니다.
 <br></br>  <br></br>  <br></br>
 ## Reference
